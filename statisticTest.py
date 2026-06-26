@@ -145,7 +145,8 @@ def ks_normality_test(series: np.ndarray) -> tuple:
     sigma = np.std(series)
     
     # Perform KS test against a normal distribution
-    stat, p_value = stats.kstest(series, 'norm', args=(mu, sigma))
+    norm_dist = stats.norm(loc=mu, scale=sigma)
+    stat, p_value = stats.kstest(series, norm_dist.cdf)
 
     return stat, p_value
 
